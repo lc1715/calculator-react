@@ -19,10 +19,18 @@ export default function Main() {
         if (Number(display)) {
             handleDisplayChange(str)
         }
+
+        if (str === '=') {
+            let newDisplay = display;
+            if (newDisplay.includes('x')) {
+                newDisplay = newDisplay.replace('x', '*')
+            }
+            setDisplay(eval(newDisplay));
+        }
     }
 
     return (
-        <div style={{ height: 300 }}>
+        <div className='calculator-container'>
             <Display display={display} />
             <div>
                 <div className="number-pad-row">
@@ -41,17 +49,15 @@ export default function Main() {
                     <Button onClick={() => handleDisplayChange('1')} title={'1'} />
                     <Button onClick={() => handleDisplayChange('2')} title={'2'} />
                     <Button onClick={() => handleDisplayChange('3')} title={'3'} />
-                    <Button onClick={() => handleDisplayChange('-')} title={'-'} />
+                    <Button onClick={() => handleCalculation('-')} title={'-'} />
                 </div>
                 <div className="number-pad-row">
                     <Button onClick={() => handleReset()} title={'C'} />
                     <Button onClick={() => handleDisplayChange('0')} title={'0'} />
-                    <Button onClick={() => undefined} title={'='} />
-                    <Button onClick={() => handleDisplayChange('+')} title={'+'} />
+                    <Button onClick={() => handleCalculation('=')} title={'='} />
+                    <Button onClick={() => handleCalculation('+')} title={'+'} />
                 </div>
             </div>
         </div>
-
-
     )
 }

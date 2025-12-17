@@ -1,4 +1,10 @@
-
 .number-pad-row {
     display: flex;
+}
+
+.calculator-container {
+    height: 300px;
+    border: black solid 2px;
+    border-radius: 7px;
+    padding: 6px;
 }
