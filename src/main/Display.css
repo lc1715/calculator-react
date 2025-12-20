@@ -1,9 +1,11 @@
 .container {
-  border: blue 2px solid;
+  border: black 2px solid;
+  border-radius: 6px;
   text-align: right;
   padding: 5px;
+  min-height: 100px;
 }
 
-.display-number{
+.display{
   font-size: 50px;
 }
