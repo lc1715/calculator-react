@@ -5,27 +5,52 @@ import './index.css'
 
 export default function Main() {
     const [display, setDisplay] = useState('')
+    const [num1, setNum1] = useState(0)
+    const [num2, setNum2] = useState(0)
+    const [operator, setOperator] = useState('')
+
+    const handleNumberChange = (str) => {
+        if (!operator) {
+            const newNum = num1 === 0 ? Number(str) : Number(num1 + str)
+            setNum1(newNum)
+            handleDisplayChange(newNum)
+        } else {
+            const newNum = num2 === 0 ? Number(str) : Number(num2 + str)
+            setNum2(newNum)
+            handleDisplayChange(num1 + operator + newNum)
+        }
+    }
 
     const handleDisplayChange = (str) => {
-        const newDisplay = display + str
-        setDisplay(newDisplay)
+        setDisplay(str)
     }
 
     const handleReset = () => {
         setDisplay('')
+        setNum1(0)
+        setNum2(0)
+        setOperator('')
     }
 
-    const handleCalculation = (str) => {
-        if (Number(display)) {
-            handleDisplayChange(str)
+    const handleOperatorChange = (str) => {
+        if (!operator) {
+            setOperator(str)
+            handleDisplayChange(num1 + str)
         }
+    }
 
-        if (str === '=') {
-            let newDisplay = display;
-            if (newDisplay.includes('x')) {
-                newDisplay = newDisplay.replace('x', '*')
-            }
-            setDisplay(eval(newDisplay));
+    const handleCalculation = () => {
+        switch (operator) {
+            case '+':
+                return handleDisplayChange(num1 + num2);
+            case '-':
+                return handleDisplayChange(num1 - num2);
+            case '*':
+                return handleDisplayChange(num1 * num2);
+            case '/':
+                return handleDisplayChange(num1 / num2);
+            default:
+                return null;
         }
     }
 
@@ -34,28 +59,28 @@ export default function Main() {
             <Display display={display} />
             <div>
                 <div className="number-pad-row">
-                    <Button onClick={() => handleDisplayChange('7')} title={'7'} />
-                    <Button onClick={() => handleDisplayChange('8')} title={'8'} />
-                    <Button onClick={() => handleDisplayChange('9')} title={'9'} />
-                    <Button onClick={() => handleCalculation('/')} title={'/'} />
+                    <Button onClick={() => handleNumberChange('7')} title={'7'} />
+                    <Button onClick={() => handleNumberChange('8')} title={'8'} />
+                    <Button onClick={() => handleNumberChange('9')} title={'9'} />
+                    <Button onClick={() => handleOperatorChange('/')} title={'/'} />
                 </div>
                 <div className="number-pad-row">
-                    <Button onClick={() => handleDisplayChange('4')} title={'4'} />
-                    <Button onClick={() => handleDisplayChange('5')} title={'5'} />
-                    <Button onClick={() => handleDisplayChange('6')} title={'6'} />
-                    <Button onClick={() => handleCalculation('x')} title={'x'} />
+                    <Button onClick={() => handleNumberChange('4')} title={'4'} />
+                    <Button onClick={() => handleNumberChange('5')} title={'5'} />
+                    <Button onClick={() => handleNumberChange('6')} title={'6'} />
+                    <Button onClick={() => handleOperatorChange('*')} title={'x'} />
                 </div>
                 <div className="number-pad-row">
-                    <Button onClick={() => handleDisplayChange('1')} title={'1'} />
-                    <Button onClick={() => handleDisplayChange('2')} title={'2'} />
-                    <Button onClick={() => handleDisplayChange('3')} title={'3'} />
-                    <Button onClick={() => handleCalculation('-')} title={'-'} />
+                    <Button onClick={() => handleNumberChange('1')} title={'1'} />
+                    <Button onClick={() => handleNumberChange('2')} title={'2'} />
+                    <Button onClick={() => handleNumberChange('3')} title={'3'} />
+                    <Button onClick={() => handleOperatorChange('-')} title={'-'} />
                 </div>
                 <div className="number-pad-row">
                     <Button onClick={() => handleReset()} title={'C'} />
-                    <Button onClick={() => handleDisplayChange('0')} title={'0'} />
-                    <Button onClick={() => handleCalculation('=')} title={'='} />
-                    <Button onClick={() => handleCalculation('+')} title={'+'} />
+                    <Button onClick={() => handleNumberChange('0')} title={'0'} />
+                    <Button onClick={handleCalculation} title={'='} />
+                    <Button onClick={() => handleOperatorChange('+')} title={'+'} />
                 </div>
             </div>
         </div>
