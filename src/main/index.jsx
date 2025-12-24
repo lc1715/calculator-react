@@ -8,8 +8,18 @@ export default function Main() {
     const [num1, setNum1] = useState(0)
     const [num2, setNum2] = useState(0)
     const [operator, setOperator] = useState('')
+    const [total, setTotal] = useState(null)
 
     const handleNumberChange = (str) => {
+        if (total !== null) {
+            setNum1(str)
+            handleDisplayChange(str)
+            setNum2(0)
+            setOperator('')
+            setTotal(null)
+            return;
+        }
+
         if (!operator) {
             const newNum = num1 === 0 ? Number(str) : Number(num1 + str)
             setNum1(newNum)
@@ -33,6 +43,14 @@ export default function Main() {
     }
 
     const handleOperatorChange = (str) => {
+        if (total !== null) {
+            setOperator(str)
+            handleDisplayChange(display + str)
+            setNum1(display)
+            setNum2(0)
+            setTotal(null)
+        }
+
         if (!operator) {
             setOperator(str)
             handleDisplayChange(num1 + str)
@@ -42,12 +60,16 @@ export default function Main() {
     const handleCalculation = () => {
         switch (operator) {
             case '+':
+                setTotal(num1 + num2)
                 return handleDisplayChange(num1 + num2);
             case '-':
+                setTotal(num1 - num2)
                 return handleDisplayChange(num1 - num2);
             case '*':
+                setTotal(num1 * num2)
                 return handleDisplayChange(num1 * num2);
             case '/':
+                setTotal(num1 / num2)
                 return handleDisplayChange(num1 / num2);
             default:
                 return null;

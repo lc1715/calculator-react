@@ -1,9 +1,9 @@
+import './Button.css'
+
 export default function Button({ title, onClick }) {
-
-
     return (
         <div>
-            <button onClick={onClick}>{title}</button>
+            <button className="number-pad-btn" onClick={onClick}>{title}</button>
         </div>
     )
 };
