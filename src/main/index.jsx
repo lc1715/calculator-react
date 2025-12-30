@@ -40,6 +40,7 @@ export default function Main() {
         setNum1(0)
         setNum2(0)
         setOperator('')
+        setTotal(null)
     }
 
     const handleOperatorChange = (str) => {
