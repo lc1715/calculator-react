@@ -84,25 +84,25 @@ export default function Main() {
                     <Button onClick={() => handleNumberChange('7')} title={'7'} />
                     <Button onClick={() => handleNumberChange('8')} title={'8'} />
                     <Button onClick={() => handleNumberChange('9')} title={'9'} />
-                    <Button onClick={() => handleOperatorChange('/')} title={'/'} />
+                    <Button onClick={() => handleOperatorChange('/')} title={'/'} isOperator />
                 </div>
                 <div className="number-pad-row">
                     <Button onClick={() => handleNumberChange('4')} title={'4'} />
                     <Button onClick={() => handleNumberChange('5')} title={'5'} />
                     <Button onClick={() => handleNumberChange('6')} title={'6'} />
-                    <Button onClick={() => handleOperatorChange('*')} title={'x'} />
+                    <Button onClick={() => handleOperatorChange('*')} title={'x'} isOperator />
                 </div>
                 <div className="number-pad-row">
                     <Button onClick={() => handleNumberChange('1')} title={'1'} />
                     <Button onClick={() => handleNumberChange('2')} title={'2'} />
                     <Button onClick={() => handleNumberChange('3')} title={'3'} />
-                    <Button onClick={() => handleOperatorChange('-')} title={'-'} />
+                    <Button onClick={() => handleOperatorChange('-')} title={'-'} isOperator />
                 </div>
                 <div className="number-pad-row">
                     <Button onClick={() => handleReset()} title={'C'} />
                     <Button onClick={() => handleNumberChange('0')} title={'0'} />
-                    <Button onClick={handleCalculation} title={'='} />
-                    <Button onClick={() => handleOperatorChange('+')} title={'+'} />
+                    <Button onClick={handleCalculation} title={'='} isOperator />
+                    <Button onClick={() => handleOperatorChange('+')} title={'+'} isOperator />
                 </div>
             </div>
         </div>

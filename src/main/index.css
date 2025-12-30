@@ -3,8 +3,9 @@
 }
 
 .calculator-container {
-    height: 300px;
+    height: 330px;
     border: black solid 2px;
     border-radius: 7px;
     padding: 6px;
+    background-color: black;
 }
